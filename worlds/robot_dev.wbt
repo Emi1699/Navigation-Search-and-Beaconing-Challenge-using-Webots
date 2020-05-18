@@ -1,0 +1,212 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation 0.5328855055920526 -0.8208361486069193 -0.20557493784520986 5.40449557040526
+  position 0.592197540501526 0.6135105618396277 0.10994285062447196
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 3 3
+  floorTileSize 3 3
+  wallHeight 1e-05
+}
+Robot {
+  translation 0 0.12 -0.5
+  rotation 0 -1 0 -3.1415853071795863
+  children [
+    Lidar {
+      translation 0 0.055 -0.03
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.1 0.01 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "lidar_back"
+      fieldOfView 2.35619
+      numberOfLayers 1
+    }
+    Lidar {
+      translation -0.045 0.055 0.02
+      rotation 0 1 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.1 0.01 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "lidar_right"
+      fieldOfView 2.35619
+      numberOfLayers 1
+    }
+    Lidar {
+      translation 0.045 0.055 0.02
+      rotation 0 1 0 -1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.1 0.01 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "lidar_left"
+      fieldOfView 2.35619
+      numberOfLayers 1
+    }
+    Lidar {
+      translation 0 0.055 0.07
+      rotation 0 1 0 3.14159
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.1 0.01 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "lidar_front"
+      fieldOfView 2.35619
+      numberOfLayers 1
+    }
+    DEF BODY Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.666667 1
+        baseColorMap ImageTexture {
+          url [
+            "textures/water.jpg"
+          ]
+        }
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.1 0.15
+      }
+      castShadows FALSE
+    }
+    DEF WHEEL1 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.06 -0.03 0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelleft1"
+        }
+      ]
+      endPoint Solid {
+        translation 0.06 -0.03 0.05
+        rotation 0 0 1 1.5708
+        children [
+          DEF WHEEL Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0
+              baseColorMap ImageTexture {
+                url [
+                  "textures/water.jpg"
+                ]
+              }
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.04
+              subdivision 24
+            }
+            castShadows FALSE
+          }
+        ]
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL2 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.06 -0.03 0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelright1"
+        }
+      ]
+      endPoint Solid {
+        translation -0.06 -0.03 0.05
+        rotation 0 0 1 1.5708
+        children [
+          USE WHEEL
+        ]
+        name "solid(1)"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL3 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.06 -0.03 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelleft2"
+        }
+      ]
+      endPoint Solid {
+        translation 0.06 -0.03 -0.05
+        rotation 0 0 1 1.5708
+        children [
+          USE WHEEL
+        ]
+        name "solid(2)"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL4 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.06 -0.03 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelright2"
+        }
+      ]
+      endPoint Solid {
+        translation -0.06 -0.03 -0.05
+        rotation 0 0 1 1.5708
+        children [
+          USE WHEEL
+        ]
+        name "solid(3)"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+  ]
+  boundingObject USE BODY
+  physics Physics {
+    density -1
+    mass 1
+  }
+  controller "robot_dev"
+}

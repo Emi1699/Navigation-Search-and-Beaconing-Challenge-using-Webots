@@ -1,0 +1,274 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+  basicTimeStep 16
+}
+Viewpoint {
+  orientation 0.9999323278445897 -0.008267197410740498 -0.008184936057884758 4.72232130930024
+  position -0.8006558150578745 0.9453729308566524 -0.7704305262320917
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 3 3
+  floorTileSize 3 3
+  wallHeight 1e-05
+}
+Robot {
+  translation -0.794707 0.12 -0.754486
+  rotation 0 1 0 3.14159
+  children [
+    DEF DS_LEFT2 DistanceSensor {
+      translation 0.05 0.025 0.0375
+      rotation 0 1 0 -0.523599
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.184314 0.596078 0.847059
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "ds_left2"
+      type "infra-red"
+    }
+    DEF DS_RIGHT2 DistanceSensor {
+      translation -0.05 0.025 0.0375
+      rotation 0 1 0 -2.61799
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.184314 0.596078 0.847059
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "ds_right2"
+      type "infra-red
+    }
+    DEF DS_RIGHT3 DistanceSensor {
+      translation -0.05 0.025 0
+      rotation 0 1 0 3.14159
+      children [
+        Shape {
+          appearance PBRAppearance {
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "ds_right3"
+      type "infra-red
+    }
+    DEF DS_LEFT3 DistanceSensor {
+      translation 0.05 0.025 0
+      children [
+        Shape {
+          appearance PBRAppearance {
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "ds_left3"
+      type "infra-red
+    }
+    DEF DS_CENTRE DistanceSensor {
+      translation 0 0.025 0.075
+      rotation 0 1 0 -1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.017 0.01 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "ds_centre"
+      type "infra-red
+    }
+    DEF BODY Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.666667 1
+        baseColorMap ImageTexture {
+          url [
+            "textures/water.jpg"
+          ]
+        }
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.1 0.15
+      }
+      castShadows FALSE
+    }
+    DEF WHEEL1 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.06 -0.03 0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelleft1"
+        }
+      ]
+      endPoint Solid {
+        translation 0.06 -0.03 0.05
+        rotation 0 0 1 1.5708
+        children [
+          DEF WHEEL Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0
+              baseColorMap ImageTexture {
+                url [
+                  "textures/water.jpg"
+                ]
+              }
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.04
+              subdivision 24
+            }
+            castShadows FALSE
+          }
+        ]
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL2 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.06 -0.03 0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelright1"
+        }
+      ]
+      endPoint Solid {
+        translation -0.06 -0.03 0.05
+        rotation 0 0 1 1.5708
+        children [
+          USE WHEEL
+        ]
+        name "solid(1)"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL3 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.06 -0.03 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelleft2"
+        }
+      ]
+      endPoint Solid {
+        translation 0.06 -0.03 -0.05
+        rotation 0 0 1 1.5708
+        children [
+          USE WHEEL
+        ]
+        name "solid(2)"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL4 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.06 -0.03 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelright2"
+        }
+      ]
+      endPoint Solid {
+        translation -0.06 -0.03 -0.05
+        rotation 0 0 1 1.5708
+        children [
+          USE WHEEL
+        ]
+        name "solid(3)"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF DS_RIGHT1 DistanceSensor {
+      translation -0.035 0.025 0.075
+      rotation 0 1 0 -2.0944
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.184314 0.596078 0.847059
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "ds_right1"
+      type "infra-red
+    }
+    DEF DS_LEFT1 DistanceSensor {
+      translation 0.035 0.025 0.075
+      rotation 0 1 0 -1.0472
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.184314 0.596078 0.847059
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "ds_left1"
+      type "infra-red
+    }
+  ]
+  boundingObject USE BODY
+  physics Physics {
+    density -1
+    mass 1
+  }
+  controller "robot_dev"
+}
