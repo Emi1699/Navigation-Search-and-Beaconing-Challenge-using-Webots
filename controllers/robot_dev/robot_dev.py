@@ -34,7 +34,7 @@ while robot.step(TIME_STEP) != -1:
         dsValues.append(ds[i].getValue())
     # process behavior
     # detect obstacles
-    print(dsValues[0])
+    #print(dsValues[0])
     centre_obstacle = dsValues[0] < 1000.0
     right_obstacle = dsValues[1] < 1000.0 or dsValues[2] < 1000.0 or dsValues[3] < 1000.0
     left_obstacle = dsValues[4] < 1000.0 or dsValues[5] < 1000.0 or dsValues[6] < 1000.0
