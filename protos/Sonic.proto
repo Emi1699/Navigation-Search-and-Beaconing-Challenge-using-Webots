@@ -11,70 +11,54 @@ PROTO Sonic [
   rotation IS rotation
   children [
     Lidar {
-      translation 0 0.055 -0.03
+      translation -0.015 0.055 0.02
+      rotation 0 1 0 2.2253
       children [
         Shape {
           appearance PBRAppearance {
           }
           geometry Box {
-            size 0.1 0.01 0.01
-          }
-          castShadows FALSE
-        }
-      ]
-      name "lidar_back"
-      fieldOfView 2.35619
-      numberOfLayers 1
-    }
-    Lidar {
-      translation -0.045 0.055 0.02
-      rotation 0 1 0 1.5708
-      children [
-        Shape {
-          appearance PBRAppearance {
-          }
-          geometry Box {
-            size 0.1 0.01 0.01
+            size 0.01 0.01 0.01
           }
           castShadows FALSE
         }
       ]
       name "lidar_right"
-      fieldOfView 2.35619
+      fieldOfView 1.309
       numberOfLayers 1
     }
     Lidar {
-      translation 0.045 0.055 0.02
-      rotation 0 1 0 -1.5708
+      translation 0.015 0.055 0.02
+      rotation 0 1 0 -2.2252996938995744
       children [
         Shape {
           appearance PBRAppearance {
           }
           geometry Box {
-            size 0.1 0.01 0.01
+            size 0.01 0.01 0.01
           }
           castShadows FALSE
         }
       ]
       name "lidar_left"
-      fieldOfView 2.35619
+      fieldOfView 1.309
       numberOfLayers 1
     }
     Lidar {
-      translation 0 0.055 0.07
+      translation 1.3268e-07 0.055 0.02
       rotation 0 1 0 3.14159
       children [
         Shape {
           appearance PBRAppearance {
           }
           geometry Box {
-            size 0.1 0.01 0.01
+            size 0.01 0.01 0.01
           }
           castShadows FALSE
         }
       ]
       name "lidar_front"
-      fieldOfView 2.35619
+      fieldOfView 0.785398
       numberOfLayers 1
     }
     DEF BODY Shape {

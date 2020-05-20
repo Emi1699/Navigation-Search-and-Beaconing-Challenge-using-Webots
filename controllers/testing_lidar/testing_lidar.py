@@ -1,7 +1,6 @@
 from controller import Robot, Lidar
 
 TIME_STEP = 64
-
 robot = Robot()
 
 wheels = []
@@ -21,73 +20,96 @@ lidar_left.enable(TIME_STEP)
 lidar_right = robot.getLidar("lidar_right")
 lidar_right.enable(TIME_STEP)
 
-lidar_back = robot.getLidar("lidar_back")
-lidar_back.enable(TIME_STEP)
 
+def removeOne(list):
+    new_list = []
+    for i in list:
+        if i != 1.0:
+            new_list.append(i)
+            
+    return new_list
+            
 
 def obstacleInfront():
-    if lidar_front.getRangeImage()[205]<0.2 and lidar_front.getRangeImage()[205] != 0.0:
+    if min(lidar_front.getRangeImage())<0.35 and min(lidar_front.getRangeImage())!=0 :
         return True
     else:
         return False
-    
+        
 def maxDistance():
-    right_max = max(lidar_right.getRangeImage())
-    left_max = max(lidar_left.getRangeImage())
+    right_val = lidar_right.getRangeImage()
+    left_val = lidar_left.getRangeImage()
+ 
+    new_right_val = removeOne(right_val)
+    new_left_val = removeOne(left_val)
     
+    right_max = max(new_right_val)
+    left_max = max(new_left_val)
+        
+    print("right max", right_max)
+    print("left max", left_max)
+    print("@@@@@@@@")
     if right_max>left_max:
         return True, right_max
     else:
         return False, left_max
         
 def turnRight(goal):
-    reading = int(1000*(lidar_front.getRangeImage()[205]))
-    goal = int(goal*1000)
+    reading = int(10000*(lidar_front.getRangeImage()[255]))
+    goal = int(goal*10000)
     if reading == goal:
-        for i in range(4):
-            wheels[i].setVelocity(0.0)
-            return true
+        stop()
+        return True
     else :
         wheels[0].setVelocity(2.0)
         wheels[1].setVelocity(2.0)
         wheels[2].setVelocity(0.0)
-        wheels[3].setVelocity(0.0)    
-
+        wheels[3].setVelocity(0.0)
         
+    i = 0
+    while i != 100 :
+        i += 1
+        
+    print(i)
         
 def moveForward():    
     for i in range(4):
         wheels[i].setVelocity(2.0)
 
 def stop():
-    print("stopping")
     for i in range(4):
         wheels[i].setVelocity(0.0)
 
         
 def turnLeft(goal):
-    reading = int(1000*(lidar_front.getRangeImage()[205]))
-    goal = int(goal*1000)
+    reading = int(10000*(lidar_front.getRangeImage()[255]))
+    goal = int(goal*10000)
+    
     if reading == goal:
-        for i in range(4):
-            wheels[i].setVelocity(0.0)
-            return true
+        stop()
+        return True
     else :
         wheels[0].setVelocity(0.0)
         wheels[1].setVelocity(0.0)
         wheels[2].setVelocity(2.0)
-        wheels[3].setVelocity(2.0)
+        wheels[3].setVelocity(2.0)      
                
 while robot.step(TIME_STEP) != -1:
-
+    
     if obstacleInfront() :
         stop()
+        print("calling maxD")
         turn_right, distance = maxDistance()
+        reading = int(10000*(lidar_front.getRangeImage()[255]))
+        goal = int(10000*distance)
         
         if turn_right :
             turnRight(distance)
         else :
             turnLeft(distance)
+        
+        if reading == goal:
+            moveForward()
         
     else: 
         moveForward()
