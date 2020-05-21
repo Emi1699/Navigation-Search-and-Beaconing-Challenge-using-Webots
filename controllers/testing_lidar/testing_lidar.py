@@ -4,7 +4,7 @@ TIME_STEP = 64
 robot = Robot()
 
 wheels = []
-wheelsNames = ['wheelleft1', 'wheelleft2', 'wheelright1', 'wheelright2']
+wheelsNames = ['frontLeft', 'backLeft', 'frontRight', 'backRight']
 for i in range(4):
     wheels.append(robot.getMotor(wheelsNames[i]))
     wheels[i].setPosition(float('inf'))
@@ -61,8 +61,8 @@ def turnRight(goal):
         stop()
         return True
     else :
-        wheels[0].setVelocity(2.0)
-        wheels[1].setVelocity(2.0)
+        wheels[0].setVelocity(0.0)
+        wheels[1].setVelocity(0.0)
         wheels[2].setVelocity(0.0)
         wheels[3].setVelocity(0.0)
         
@@ -74,7 +74,7 @@ def turnRight(goal):
         
 def moveForward():    
     for i in range(4):
-        wheels[i].setVelocity(2.0)
+        wheels[i].setVelocity(5.0)
 
 def stop():
     for i in range(4):
@@ -91,28 +91,29 @@ def turnLeft(goal):
     else :
         wheels[0].setVelocity(0.0)
         wheels[1].setVelocity(0.0)
-        wheels[2].setVelocity(2.0)
-        wheels[3].setVelocity(2.0)      
+        wheels[2].setVelocity(5.0)
+        wheels[3].setVelocity(5.0)      
                
 while robot.step(TIME_STEP) != -1:
     
-    if obstacleInfront() :
-        stop()
-        print("calling maxD")
-        turn_right, distance = maxDistance()
-        reading = int(10000*(lidar_front.getRangeImage()[255]))
-        goal = int(10000*distance)
+    # if obstacleInfront() :
+        # stop()
+        # print("calling maxD")
+        # turn_right, distance = maxDistance()
+        # reading = int(10000*(lidar_front.getRangeImage()[255]))
+        # goal = int(10000*distance)
         
-        if turn_right :
-            turnRight(distance)
-        else :
-            turnLeft(distance)
+        # if turn_right :
+            # turnRight(distance)
+        # else :
+            # turnLeft(distance)
         
-        if reading == goal:
-            moveForward()
+        # if reading == goal:
+            # moveForward()
         
-    else: 
-        moveForward()
+    # else: 
+        # moveForward()
+        turnRight(3)
     
     
     

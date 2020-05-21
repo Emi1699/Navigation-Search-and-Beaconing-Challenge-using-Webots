@@ -7,5 +7,5 @@ centralWidgetVisible: 1
 selectionDisabled: 0
 viewpointLocked: 0
 orthographicViewHeight: 1
-textFiles: 1 "controllers/testing_lidar/testing_lidar.py" "controllers/robot_dev/robot_dev.py"
+textFiles: 0 "controllers/testing_lidar/testing_lidar.py" "controllers/robot_dev/robot_dev.py"
 globalOptionalRendering: LidarRaysPaths
