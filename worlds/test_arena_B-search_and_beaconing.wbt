@@ -3,8 +3,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation -0.0007340982268571855 0.7645854167437254 0.6445219946616386 3.139850957692769
-  position -0.8200903815150873 4.862373486226349 0.10813826305937424
+  orientation 0.9935289492245729 0.10748201327304467 0.03671299327879601 5.620907115730197
+  position -1.2680454001292314 2.3517002484969076 3.9008767338096444
   followType "Pan and Tilt Shot"
 }
 TexturedBackground {
@@ -124,6 +124,7 @@ DEF BEACONS Group {
           }
         }
       ]
+      name "solid(5)"
       boundingObject USE BCN_RED
       physics DEF BCN_PHYS Physics {
         density -1
@@ -222,34 +223,245 @@ DEF BEACONS Group {
     }
   ]
 }
-StartZone {
-  translation -1.47 0 1.488
-  rotation 0 1 0 3.141592653589793
-  colour 0 0.5 0
-  name "start zone A"
-  recColSlot [
-    0 0.5 0
-  ]
-}
-StartZone {
-  translation -0.865 0 -1.47
-  rotation 0 1 0 -1.5707996938995747
-  colour 0 0.5 0.5
-  name "start zone B"
-  recColSlot [
-    0 0.5 0.5
-  ]
-}
-StartZone {
-  translation 1.471 0 -1.489
-  colour 0 0 0.5
-  name "start zone C"
-  recColSlot [
-    0 0 0.5
-  ]
-}
-Sonic {
+Robot {
   translation -1.4768 7.10543e-15 1.472
   rotation 0 1 0 -3.1415853071795863
+  children [
+    Camera {
+      translation -0.05 0.025 0
+      rotation 0 1 0 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Sphere {
+            radius 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "camera_right"
+      recognitionColors [
+        1 0 1
+        0.5 0 0.5
+        0 0 1
+        0 0 0.5
+        0 1 1
+        0 0.5 0.5
+        0 1 0
+        0 0.5 0
+        1 1 0
+        0.5 0.5 0
+        1 0 0
+        0.5 0 0
+      ]
+      recognition Recognition {
+        maxObjects 1
+      }
+    }
+    Camera {
+      translation 0.05 0.025 0
+      rotation 0 1 0 -1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Sphere {
+            radius 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "camera_left"
+      recognitionColors [
+        1 0 1
+        0.5 0 0.5
+        0 0 1
+        0 0 0.5
+        0 1 1
+        0 0.5 0.5
+        0 1 0
+        0 0.5 0
+        1 1 0
+        0.5 0.5 0
+        1 0 0
+        0.5 0 0
+      ]
+      recognition Recognition {
+        maxObjects 1
+      }
+    }
+    Camera {
+      translation 0 0.025 0.075
+      rotation 0 1 0 3.141592653589793
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Sphere {
+            radius 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "camera_front"
+      recognitionColors [
+        1 0 1
+        0.5 0 0.5
+        0 0 1
+        0 0 0.5
+        0 1 1
+        0 0.5 0.5
+        0 1 0
+        0 0.5 0
+        1 1 0
+        0.5 0.5 0
+        1 0 0
+        0.5 0 0
+      ]
+      recognition Recognition {
+        maxObjects 1
+      }
+    }
+    Lidar {
+      translation 1.3268e-07 0.055 0.02
+      rotation 0 1 0 3.14159
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "lidar_360"
+      fieldOfView 0.785398
+      numberOfLayers 1
+    }
+    DEF BODY Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.666667 1
+        baseColorMap ImageTexture {
+          url [
+            "/Applications/Webots.app/projects/default/worlds/textures/water.jpg"
+          ]
+        }
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.1 0.15
+      }
+      castShadows FALSE
+    }
+    DEF WHEEL1 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.06 -0.03 0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelleft1"
+        }
+      ]
+      endPoint Solid {
+        translation 0.06 -0.03 0.05
+        rotation 0 0 1 1.5707999999999998
+        children [
+          DEF WHEEL Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0
+              baseColorMap ImageTexture {
+                url [
+                  "/Applications/Webots.app/projects/default/worlds/textures/water.jpg"
+                ]
+              }
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.04
+              subdivision 24
+            }
+            castShadows FALSE
+          }
+        ]
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL2 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.06 -0.03 0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelright1"
+        }
+      ]
+      endPoint Solid {
+        translation -0.06 -0.03 0.05
+        rotation 0 0 1 1.5707999999999998
+        children [
+          USE WHEEL
+        ]
+        name "solid(1)"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL3 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.06 -0.03 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelleft2"
+        }
+      ]
+      endPoint Solid {
+        translation 0.06 -0.03 -0.05
+        rotation 0 0 1 1.5707999999999998
+        children [
+          USE WHEEL
+        ]
+        name "solid(2)"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL4 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.06 -0.03 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelright2"
+        }
+      ]
+      endPoint Solid {
+        translation -0.06 -0.03 -0.05
+        rotation 0 0 1 1.5707999999999998
+        children [
+          USE WHEEL
+        ]
+        name "solid(3)"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+  ]
+  name "Sonic"
+  boundingObject USE BODY
+  physics Physics {
+    density -1
+    mass 1
+  }
   controller "robot_dev"
 }

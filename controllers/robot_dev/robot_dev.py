@@ -3,6 +3,8 @@ from controller import Robot, Lidar, Camera, CameraRecognitionObject
 TIME_STEP = 64
 robot = Robot()
 
+robotSpeed = 6
+
 wheels = []
 wheelsNames = ['wheelleft1', 'wheelleft2', 'wheelright1', 'wheelright2']
 for i in range(4):
@@ -46,6 +48,26 @@ def foundColour(c):
         else:
             return False
     return False
+    
+def turnRight():
+    wheels[0].setVelocity(robotSpeed)
+    wheels[1].setVelocity(robotSpeed)
+    wheels[2].setVelocity(-robotSpeed)
+    wheels[3].setVelocity(-robotSpeed)
+    
+def turnLeft():
+    wheels[0].setVelocity(-robotSpeed)
+    wheels[1].setVelocity(-robotSpeed)
+    wheels[2].setVelocity(robotSpeed)
+    wheels[3].setVelocity(robotSpeed)
+
+def stop():
+    for i in range(4):
+        wheels[i].setVelocity(0)
+        
+def moveForward():    
+    for i in range(4):
+        wheels[i].setVelocity(robotSpeed)
        
 while flag == True:
     if robot.step(TIME_STEP) == -1:
@@ -56,7 +78,9 @@ while flag == True:
         print(colour)
         start = False
         
+    moveForward()
+        
     print(foundColour(colour))
     
-    flag = False
+    # flag = False
         
