@@ -4,7 +4,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 0.9999962071891765 0.0019596459990470624 0.0019353022554866475 4.724885187862877
-  position 0.0102484419354252 6.42226977631362 0.02421631773764026
+  position 0.03156510397488197 5.917041891100367 0.4054843616160787
   followType "Pan and Tilt Shot"
 }
 TexturedBackground {
@@ -91,6 +91,18 @@ DEF MAZE_WALLS Group {
       translation 0.467 0.15 -0.276
       rotation 0 -1 0 0.6544936938995747
       name "maze wall custom(2)"
+      length 0.95
+    }
+    MazeWall {
+      translation -0.280534 0.15 1.25354
+      rotation 0 1 0 -1.4398953071795866
+      name "maze wall custom(4)"
+      length 0.95
+    }
+    MazeWall {
+      translation 0.144689 0.15 1.24054
+      rotation 0 1 0 -1.4398953071795866
+      name "maze wall custom(5)"
       length 0.95
     }
     MazeWall {
@@ -224,7 +236,7 @@ DEF BEACONS Group {
   ]
 }
 Robot {
-  translation -1.47673 -6.21724e-15 1.43137
+  translation -0.0572717 -6.21724e-15 1.52678
   rotation 0 1 0 -3.1415853071795863
   children [
     Camera {

@@ -102,6 +102,13 @@ def avoidObstacles(lidarData):
             turnLeft()
         else:
             moveForward()
+
+def checkIfOutOfMaze(lidarData):
+    lidarLeft = lidarData[(128 - 32):(128 + 32)]
+    lidarRight = lidarData[(384 - 32):(384 + 32)]
+    
+    if min(lidarLeft) > 0.5 and min(lidarRight) > 0.5:
+        return 1
        
 while flag == True:
     if robot.step(TIME_STEP) == -1:
@@ -121,7 +128,9 @@ while flag == True:
         start = False
       
     moveForward()  
-    avoidObstacles(lidarData)
+    # avoidObstacles(lidarData)
+    if checkIfOutOfMaze(lidarData) == 1:
+        print("true")
         
     # print(foundColour(colour))
     
