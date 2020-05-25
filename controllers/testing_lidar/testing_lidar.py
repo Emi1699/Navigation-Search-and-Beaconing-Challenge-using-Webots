@@ -52,7 +52,7 @@ while robot.step(TIME_STEP) != -1:
     lidarData = readLidarData()
     
     #select lidar data needed for detecting walls and shit
-    lidarFront = lidarData[(256 - 12):(256 +  12)]
+    lidarFront = lidarData[(256 - 12):(256 +  14)]
     lidarFrontRight = lidarData[(320 - 32):(320 + 32)]
     
     
@@ -63,13 +63,13 @@ while robot.step(TIME_STEP) != -1:
     # > = off
     # < < on
         
-    if min(lidarFront) > 0.31 and min(lidarFrontRight) > 0.31:
+    if min(lidarFront) > 0.325 and min(lidarFrontRight) > 0.325:
         turnRight()
-    if min(lidarFront) < 0.31 and min(lidarFrontRight) > 0.31:
+    if min(lidarFront) < 0.325 and min(lidarFrontRight) > 0.325:
         turnLeft()
-    if min(lidarFront) > 0.31 and min(lidarFrontRight) < 0.31:
+    if min(lidarFront) > 0.325 and min(lidarFrontRight) < 0.325:
         moveForward()
-    if min(lidarFront) < 0.31 and min(lidarFrontRight) < 0.31:
+    if min(lidarFront) < 0.325 and min(lidarFrontRight) < 0.325:
         turnLeft() 
         
         
