@@ -263,7 +263,7 @@ DEF MAZE_WALLS Group {
   ]
 }
 DEF F Robot {
-  translation -1.65669 1.55431e-14 1.42302
+  translation -1.47552 1.55431e-14 1.52763
   rotation 0 -1 0 -3.1415853071795863
   children [
     DEF LIDAR_360 Lidar {

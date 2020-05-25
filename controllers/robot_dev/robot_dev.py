@@ -68,19 +68,62 @@ def stop():
 def moveForward():    
     for i in range(4):
         wheels[i].setVelocity(robotSpeed)
+        
+def moveBackwards():
+    for i in range(4):
+        wheels[i].setVelocity(-robotSpeed)
+        
+def readLidarData():
+    lidarData = lidar.getRangeImage()
+    return lidarData
+    
+def avoidObstacles(lidarData):
+    lidarLeft = lidarData[(128 - 32):(128 + 32)]
+    lidarFront = lidarData[(256 - 14):(256 +  14)]
+    lidarFrontRight = lidarData[(320 - 15):(320 + 30)]
+    lidarFrontLeft = lidarData[(192 - 30):(192 + 15)]
+    lidarRight = lidarData[(384 - 32):(384 + 32)]
+    
+    stopEverythingElse = 0
+    
+    
+    if max(lidarFront) < 0.5:
+        if max(lidarFrontLeft) > 0.65:
+            turnLeft()
+        elif max(lidarFrontRight) > 0.65:
+            turnRight()
+        else:
+            moveBackwards()
+            stopEverythingElse = 1
+    elif stopEverythingElse != 1:
+        if max(lidarFrontLeft) < 0.425:
+            turnRight()
+        elif max(lidarFrontRight) < 0.425:
+            turnLeft()
+        else:
+            moveForward()
        
 while flag == True:
     if robot.step(TIME_STEP) == -1:
         flag = False
+    
+    lidarData = readLidarData()
+    
+    #print lidarData from bottom, left, top, right
+    # print("  0: " + str(lidarData[0]))
+    # print("128: " + str(lidarData[128]))
+    # print("256: " + str(lidarData[256]))
+    # print("384: " + str(lidarData[384]))
             
     if start == True:
         colour = getStartColour()
-        print(colour)
+        # print(colour)
         start = False
+      
+    moveForward()  
+    avoidObstacles(lidarData)
         
-    moveForward()
-        
-    print(foundColour(colour))
+    # print(foundColour(colour))
     
     # flag = False
         
