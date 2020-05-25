@@ -257,5 +257,5 @@ Robot {
     density -1
     mass 1
   }
-  controller "robot_dev"
+  controller "<extern>"
 }

@@ -70,7 +70,7 @@ while robot.step(TIME_STEP) != -1:
     if min(lidarFront) > 0.31 and min(lidarFrontRight) < 0.31:
         moveForward()
     if min(lidarFront) < 0.31 and min(lidarFrontRight) < 0.31:
-        turnLeft()
+        turnLeft() 
         
         
         
