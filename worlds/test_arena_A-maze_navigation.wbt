@@ -3,8 +3,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation -0.7331168796538526 0.5006945175838015 -0.46026583712906927 4.4880369039247725
-  position -1.53169918581048 -0.4244754418736156 1.5439405571201124
+  orientation -0.9990796800248435 -0.03159103607608917 -0.029013779503813755 1.4867137820688443
+  position -1.3935433361489686 2.580659458446005 1.2128139917671692
   followType "Pan and Tilt Shot"
 }
 TexturedBackground {
@@ -262,8 +262,139 @@ DEF MAZE_WALLS Group {
     }
   ]
 }
-Sonic {
-  translation -1.523 0 1.535
-  rotation 0 1 0 3.14159
+DEF F Robot {
+  translation -1.45287 1.55431e-14 1.56483
+  rotation 0 1 0 3.1415853071795863
+  children [
+    DEF LIDAR_360 Lidar {
+      translation 0 0.06 0
+      scale 1.13754 1.13754 1.13754
+      name "lidar_360"
+      numberOfLayers 1
+      type "rotating"
+    }
+    DEF BODY Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.666667 1
+        baseColorMap ImageTexture {
+          url [
+            "/Applications/Webots.app/projects/default/worlds/textures/water.jpg"
+          ]
+        }
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.1 0.15
+      }
+      castShadows FALSE
+    }
+    DEF WHEEL1 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.06 -0.03 0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelleft1"
+        }
+      ]
+      endPoint Solid {
+        translation 0.06 -0.03 0.05
+        rotation 1.867749709357985e-08 -1.867756492144752e-08 0.9999999999999998 1.5707999999996995
+        children [
+          DEF WHEEL Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0
+              baseColorMap ImageTexture {
+                url [
+                  "/Applications/Webots.app/projects/default/worlds/textures/water.jpg"
+                ]
+              }
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.02
+              radius 0.04
+              subdivision 24
+            }
+            castShadows FALSE
+          }
+        ]
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL2 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.06 -0.03 0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelright1"
+        }
+      ]
+      endPoint Solid {
+        translation -0.06 -0.03 0.05
+        rotation 1.49965771917171e-07 -1.4996632662981587e-07 0.9999999999999776 1.5707999999996447
+        children [
+          USE WHEEL
+        ]
+        name "solid(1)"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL3 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.06 -0.03 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelleft2"
+        }
+      ]
+      endPoint Solid {
+        translation 0.06 -0.03 -0.05
+        rotation -9.37806714325808e-09 9.378101606725621e-09 0.9999999999999999 1.5707999999996887
+        children [
+          USE WHEEL
+        ]
+        name "solid(2)"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL4 HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.06 -0.03 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheelright2"
+        }
+      ]
+      endPoint Solid {
+        translation -0.06 -0.03 -0.05
+        rotation -1.3298791971387739e-08 1.3298839545102331e-08 0.9999999999999999 1.5707999999996685
+        children [
+          USE WHEEL
+        ]
+        name "solid(3)"
+        boundingObject USE WHEEL
+        physics Physics {
+        }
+      }
+    }
+  ]
+  name "Sonic"
+  boundingObject USE BODY
+  physics Physics {
+    density -1
+    mass 1
+  }
   controller "testing_lidar"
 }
