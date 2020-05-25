@@ -3,8 +3,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation 0.5328855055920526 -0.8208361486069193 -0.20557493784520986 5.40449557040526
-  position 0.592197540501526 0.6135105618396277 0.10994285062447196
+  orientation 0.19037427770208973 0.9307816238057796 0.3120948624615341 4.174354273405041
+  position -3.491219178681132 2.831766181171754 -1.9631204030631006
 }
 TexturedBackground {
 }
@@ -13,78 +13,127 @@ TexturedBackgroundLight {
 RectangleArena {
   floorSize 3 3
   floorTileSize 3 3
-  wallHeight 1e-05
+  wallHeight 0.5
+  wallAppearance BrushedAluminium {
+    colorOverride 1 0 0
+  }
 }
 Robot {
-  translation 0 0.12 -0.5
-  rotation 0 -1 0 -3.1415853071795863
+  translation -0.83601 0.13 -0.533765
+  rotation 0 1 0 -1.5708053071795867
   children [
-    Lidar {
-      translation 0 0.055 -0.03
-      children [
-        Shape {
-          appearance PBRAppearance {
-          }
-          geometry Box {
-            size 0.1 0.01 0.01
-          }
-          castShadows FALSE
-        }
-      ]
-      name "lidar_back"
-      fieldOfView 2.35619
-      numberOfLayers 1
-    }
-    Lidar {
-      translation -0.045 0.055 0.02
+    Camera {
+      translation -0.05 0.025 0
       rotation 0 1 0 1.5708
       children [
         Shape {
           appearance PBRAppearance {
           }
-          geometry Box {
-            size 0.1 0.01 0.01
+          geometry Sphere {
+            radius 0.01
           }
           castShadows FALSE
         }
       ]
-      name "lidar_right"
-      fieldOfView 2.35619
-      numberOfLayers 1
+      name "camera_right"
+      recognitionColors [
+        1 0 1
+        0.5 0 0.5
+        0 0 1
+        0 0 0.5
+        0 1 1
+        0 0.5 0.5
+        0 1 0
+        0 0.5 0
+        1 1 0
+        0.5 0.5 0
+        1 0 0
+        0.5 0 0
+      ]
+      recognition Recognition {
+        maxObjects 1
+      }
     }
-    Lidar {
-      translation 0.045 0.055 0.02
+    Camera {
+      translation 0.05 0.025 0
       rotation 0 1 0 -1.5708
       children [
         Shape {
           appearance PBRAppearance {
           }
-          geometry Box {
-            size 0.1 0.01 0.01
+          geometry Sphere {
+            radius 0.01
           }
           castShadows FALSE
         }
       ]
-      name "lidar_left"
-      fieldOfView 2.35619
-      numberOfLayers 1
+      name "camera_left"
+      recognitionColors [
+        1 0 1
+        0.5 0 0.5
+        0 0 1
+        0 0 0.5
+        0 1 1
+        0 0.5 0.5
+        0 1 0
+        0 0.5 0
+        1 1 0
+        0.5 0.5 0
+        1 0 0
+        0.5 0 0
+      ]
+      recognition Recognition {
+        maxObjects 1
+      }
+    }
+    Camera {
+      translation 0 0.025 0.075
+      rotation 0 1 0 3.141592653589793
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Sphere {
+            radius 0.01
+          }
+          castShadows FALSE
+        }
+      ]
+      name "camera_front"
+      recognitionColors [
+        1 0 1
+        0.5 0 0.5
+        0 0 1
+        0 0 0.5
+        0 1 1
+        0 0.5 0.5
+        0 1 0
+        0 0.5 0
+        1 1 0
+        0.5 0.5 0
+        1 0 0
+        0.5 0 0
+      ]
+      recognition Recognition {
+        maxObjects 1
+      }
     }
     Lidar {
-      translation 0 0.055 0.07
+      translation 1.3268e-07 0.055 0.02
       rotation 0 1 0 3.14159
       children [
         Shape {
           appearance PBRAppearance {
           }
           geometry Box {
-            size 0.1 0.01 0.01
+            size 0.01 0.01 0.01
           }
           castShadows FALSE
         }
       ]
-      name "lidar_front"
-      fieldOfView 2.35619
+      name "lidar_360"
       numberOfLayers 1
+      type "rotating"
     }
     DEF BODY Shape {
       appearance PBRAppearance {
@@ -113,7 +162,7 @@ Robot {
       ]
       endPoint Solid {
         translation 0.06 -0.03 0.05
-        rotation 0 0 1 1.5708
+        rotation 2.850663606906543e-17 -2.8506740779978826e-17 1 1.5707999999999998
         children [
           DEF WHEEL Shape {
             appearance PBRAppearance {
@@ -150,7 +199,7 @@ Robot {
       ]
       endPoint Solid {
         translation -0.06 -0.03 0.05
-        rotation 0 0 1 1.5708
+        rotation 5.542413750974645e-17 -5.54243410943451e-17 1 1.5707999999999998
         children [
           USE WHEEL
         ]
@@ -171,7 +220,7 @@ Robot {
       ]
       endPoint Solid {
         translation 0.06 -0.03 -0.05
-        rotation 0 0 1 1.5708
+        rotation 3.596289098355261e-17 -3.5963023082869904e-17 1 1.5707999999999998
         children [
           USE WHEEL
         ]
@@ -192,7 +241,7 @@ Robot {
       ]
       endPoint Solid {
         translation -0.06 -0.03 -0.05
-        rotation 0 0 1 1.5708
+        rotation 2.4639680603551415e-17 -2.4639771110318183e-17 1 1.5707999999999998
         children [
           USE WHEEL
         ]

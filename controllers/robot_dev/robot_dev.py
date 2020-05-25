@@ -11,14 +11,8 @@ for i in range(4):
     wheels[i].setVelocity(0.0)
 
 
-lidar_front = robot.getLidar("lidar_front")
-lidar_front.enable(TIME_STEP)
-
-lidar_left = robot.getLidar("lidar_left")
-lidar_left.enable(TIME_STEP)
-
-lidar_right = robot.getLidar("lidar_right")
-lidar_right.enable(TIME_STEP)
+lidar = robot.getLidar("lidar_360")
+lidar.enable(TIME_STEP)
 
 camera_front = robot.getCamera("camera_front")
 camera_front.enable(TIME_STEP)
